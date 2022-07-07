@@ -6,11 +6,8 @@ NC='\033[0m';
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-echo `pwd`
-sudo cp .devcontainer/develop.settings.php sites/default/settings.php;
-cp .devcontainer/launch.json .vscode/launch.json
 # get confirmation
-read -t 15 -N 1 -p "This will drop database and rebuild site. Continue (y/n)? " answer
+read -t 15 -N 1 -p "This will drop database and rebuild site. Continue (y/N)? " answer
 echo
 
 # if answer is yes within 15 seconds start updating cluster nodes ...
@@ -19,6 +16,10 @@ then
     printf "\n${SUCCESS_COLOR}${bold}Stop rebuild site...\n${NORMAL_COLOR}${normal}"
     exit 0;
 fi
+# Copy settings.php to site
+sudo cp .devcontainer/develop.settings.php web/sites/default/settings.php;
+cp -f .devcontainer/launch.json .vscode/launch.json
 
 printf "\n${GREEN}${bold}Run drush site:install...\n\n${NC}";
-drush si --site-name=DEV --account-name=admin --account-pass=admin --account-mail=hello@admin.jet.dev --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@db:3306/$MYSQL_DATABASE -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; };
+# drush si minimal --site-name=DEV --account-name=admin --account-pass=admin --account-mail=hello@admin.jet.dev --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@db:3306/$MYSQL_DATABASE -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; };
+drush si --existing-config --site-name=DEV --account-name=admin --account-pass=admin --account-mail=hello@admin.jet.dev --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@db:3306/$MYSQL_DATABASE -y || { printf "\n${RED}${bold}ERROR Site install ...\n\n${NC}"; exit 1; };
