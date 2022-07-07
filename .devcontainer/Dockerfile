@@ -44,7 +44,7 @@ RUN xdebug_conf_path=/usr/local/etc/php/conf.d/xdebug.ini;\
   echo "xdebug.show_exception_trace=0" >> $xdebug_conf_path;\
   echo "xdebug.idekey=VSCODE" >> $xdebug_conf_path;
 
-COPY ./apache.conf /etc/apache2/sites-enabled/apache.conf
+COPY ./apache.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN echo "export APACHE_RUN_USER=vscode" >> /etc/apache2/envvars;
 RUN echo "export APACHE_RUN_GROUP=vscode" >> /etc/apache2/envvars;
