@@ -1,0 +1,111 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/php
+{
+  "name": "Drupal-9",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  // Minimum host requirements
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "6gb"
+  },
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "editor.renderWhitespace": "boundary",
+        "editor.rulers": [
+          120
+        ],
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.trimAutoWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.wordWrap": "off",
+        "editor.wordWrapColumn": 120,
+        "emmet.includeLanguages": {
+          "twig": "html"
+        },
+        "files.associations": {
+          "*.inc": "php",
+          "*.module": "php",
+          "*.install": "php",
+          "*.theme": "php",
+          "*.profile": "php",
+          "*.tpl.php": "php",
+          "*.test": "php",
+          "*.php": "php",
+          "*.info": "ini"
+        },
+        "html.format.enable": true,
+        "html.format.endWithNewline": true,
+        "html.format.indentInnerHtml": true,
+        "html.format.wrapLineLength": 80,
+        "intelephense.completion.maxItems": 1000,
+        "intelephense.environment.phpVersion": "8.1",
+        "intelephense.files.associations": [
+          "*.php",
+          "*.phtml",
+          "*.inc",
+          "*.module",
+          "*.install",
+          "*.theme",
+          "*.tpl.php",
+          "*.test"
+        ],
+        "intelephense.files.maxSize": 10000000,
+        "intelephense.format.enable": true,
+        "intelephense.phpdoc.returnVoid": false,
+        "intelephense.phpdoc.useFullyQualifiedNames": true,
+        "phpsab.executablePathCBF": "/bin/phpcbf",
+        "phpsab.executablePathCS": "/bin/phpcs",
+        "phpsab.fixerArguments": [
+          "--extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml"
+        ],
+        "phpsab.fixerEnable": true,
+        "phpsab.snifferArguments": [
+          "--extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml"
+        ],
+        "phpsab.snifferMode": "onType",
+        "phpsab.snifferTypeDelay": 500,
+        "phpsab.standard": "Drupal,DrupalPractice",
+        "sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64"
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "nadim-vscode.symfony-code-snippets",
+        "valeryanm.vscode-phpsab",
+        "neilbrayfield.php-docblocker",
+        "mrmlnc.vscode-apache",
+        "SonarSource.sonarlint-vscode"
+      ],
+      "devPort": 8000
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    80,
+    "adminer:8080",
+    "mailhog:8025"
+  ],
+  // Use 'otherPortsAttributes' to configure any ports that aren't configured using 'portsAttributes'.
+  // "otherPortsAttributes": {
+  // 		"onAutoForward": "silent"
+  // },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+  "postCreateCommand": "sudo ln -sf $(pwd) /code && composer install -n && bash .devcontainer/install.bash",
+  "features": {
+    "docker-from-docker": {
+      "version": "latest",
+      "dockerDashComposeVersion": "v2"
+    }
+  }
+}
