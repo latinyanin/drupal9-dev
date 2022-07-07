@@ -19,6 +19,8 @@
     "drupal/core-composer-scaffold": "^9.3",
     "drupal/core-project-message": "^9.3",
     "drupal/core-recommended": "^9.3",
+    "drupal/gin": "^3.0@beta",
+    "drupal/gin_toolbar": "^1.0@beta",
     "drush/drush": "^11.0",
     "drupal/smtp": "^1.0"
   },
@@ -95,6 +97,7 @@
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-    "drupal/coder": "^8.3"
+    "drupal/coder": "^8.3",
+    "drupal/devel": "^4.1"
   }
 }
