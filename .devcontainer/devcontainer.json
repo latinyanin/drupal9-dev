@@ -82,7 +82,8 @@
         "valeryanm.vscode-phpsab",
         "neilbrayfield.php-docblocker",
         "mrmlnc.vscode-apache",
-        "SonarSource.sonarlint-vscode"
+        "SonarSource.sonarlint-vscode",
+        "neilbrayfield.php-docblocker"
       ],
       "devPort": 8000
     }
