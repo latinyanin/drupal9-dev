@@ -62,3 +62,5 @@
 /drupal
 /.editorconfig
 /.gitattributes
+.vscode
+.workspace
